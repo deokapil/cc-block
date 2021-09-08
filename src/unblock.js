@@ -53,9 +53,9 @@ export const unblock = function(...scriptUrlsOrRegexes) {
         }
     }
 
-
+    
     // Parse existing script tags with a marked type
-    const tags = document.querySelectorAll(`script[type="${TYPE_ATTRIBUTE}"]`)
+    const tags = document.querySelectorAll(`[data-pcr]`)
     for(let i = 0; i < tags.length; i++) {
         const script = tags[i]
         if(willBeUnblocked(script)) {
@@ -75,12 +75,17 @@ export const unblock = function(...scriptUrlsOrRegexes) {
                     scriptNode.setAttribute(attribute.name, script.attributes[i].value)
                 }
             }
-            scriptNode.setAttribute('src', script.src)
+            if (script.src){
+                scriptNode.setAttribute('src', script.src)
+            }else{
+                for(let j = 0; j < script.childNodes.length; j++){
+                    scriptNode.appendChild(script.childNodes[j]);
+                }
+            }
             scriptNode.setAttribute('type', type || 'application/javascript')
             document.head.appendChild(scriptNode)
             backupScripts.blacklisted.splice(index - indexOffset, 1)
             indexOffset++
-            console.log(backupScripts.blacklisted)
         }
     )
 
