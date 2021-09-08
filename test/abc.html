@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        window.DO_NOT_BLOCK = [
+            /not-blocked\.js$/,
+        ]
+    </script>
+    <script src="/build/index_bundle.js"></script>
+</head>
+<body>
+    <h1>Hello!</h1>
+    <p id="content">This Site uses Cookies please click button below to give consent</p>
+    <button onclick="fr()">Give Consent</button>
+
+    <script src="/test/scripts/script-set-cookie.js"></script>
+    <script src="/test/scripts/script-blocked.js"></script>
+    <script src="/test/scripts/not-blocked.js"></script>
+    <script type="text/javascript">
+        function fr(){
+            BLK.unblock();
+        }
+        
+    </script>
+</body>
+</html>
